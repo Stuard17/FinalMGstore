@@ -1,0 +1,368 @@
+/* RESET GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --color-primario: #111111;   /* Negro profundo */
+    --color-secundario: #f4f4f4; /* Gris ultra claro */
+    --color-acento: #ffcc00;     /* Dorado/Amarillo Urbano */
+    --color-texto: #333333;
+    --color-blanco: #ffffff;
+    --color-whatsapp: #25d366;
+}
+
+body {
+    background-color: var(--color-secundario);
+    color: var(--color-texto);
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background-color: var(--color-primario);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-blanco);
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--color-acento);
+}
+
+.nav-links a {
+    color: var(--color-blanco);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--color-acento);
+}
+
+.nav-icons .cart-icon {
+    color: var(--color-blanco);
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.nav-icons .cart-icon:hover {
+    color: var(--color-acento);
+    transform: scale(1.1);
+}
+
+/* HERO SECTION */
+.hero {
+    height: 75vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=1470&auto=format&fit=crop') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 8%;
+}
+
+.hero-content {
+    max-width: 600px;
+    color: var(--color-blanco);
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 14px 35px;
+    background-color: var(--color-acento);
+    color: var(--color-primario);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-blanco);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
+}
+
+/* SECCIÓN PRODUCTOS */
+.products-section {
+    padding: 70px 8%;
+    text-align: center;
+}
+
+.products-section h2 {
+    font-size: 36px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-primario);
+}
+
+.stripe {
+    width: 70px;
+    height: 4px;
+    background-color: var(--color-acento);
+    margin: 15px auto 45px auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* ARQUITECTURA TARJETA GIRATORIA (3D FLIP CARD) */
+.product-card {
+    background-color: transparent;
+    height: 500px; 
+    perspective: 1000px; 
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+/* EFECTO HOVER: Gira al pasar el cursor y vuelve al quitarlo */
+.product-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Caras frontal y trasera en común */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* CARA FRONTAL */
+.card-front {
+    background-color: var(--color-blanco);
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--color-primario);
+    color: var(--color-acento);
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.product-img {
+    height: 320px;
+    overflow: hidden;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-primario);
+}
+
+.price {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-primario);
+}
+
+/* BOTÓN VER DETALLES */
+.btn-details {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-texto);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--color-acento);
+    align-self: center;
+    padding-bottom: 2px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.product-card:hover .btn-details {
+    color: var(--color-acento);
+}
+
+/* CARA TRASERA (Fondo de la misma imagen oscurecido en un 85%-95% con gradiente) */
+.card-back {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), var(--bg-img);
+    background-size: cover;
+    background-position: center;
+    transform: rotateY(180deg); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    color: var(--color-blanco);
+}
+
+.back-content h3 {
+    font-size: 22px;
+    color: var(--color-acento);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.back-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.btn-buy {
+    display: inline-block;
+    width: 100%;
+    padding: 13px;
+    background-color: var(--color-acento);
+    color: var(--color-primario);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-buy:hover {
+    background-color: var(--color-blanco);
+    color: var(--color-primario);
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+}
+
+/* FOOTER */
+footer {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 50px 20px;
+    margin-top: 40px;
+}
+
+.motivational-quote {
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+.copyright {
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+/* BOTÓN FLOTANTE WHATSAPP */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--color-whatsapp);
+    color: var(--color-blanco);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 100;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 20px 5%;
+    }
+    .nav-links {
+        display: none;
+    }
+    .hero-content h1 {
+        font-size: 36px;
+    }
+    .hero {
+        height: 60vh;
+        padding: 0 5%;
+    }
+    .product-card {
+        height: 480px;
+    }
+}
