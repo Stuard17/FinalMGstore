@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MG Store | Premium Headwear</title>
+    <title>MG Store | Premium Headwear Elite</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Iconos de FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Syne (Urbana de impacto extremo) e Inter (Lectura limpia) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- NAV BAR -->
     <header class="navbar">
         <div class="logo">MG<span>STORE</span></div>
         <nav class="nav-links">
@@ -21,11 +18,13 @@
             <a href="#">Lanzamientos</a>
         </nav>
         <div class="nav-icons">
-            <a href="#" class="cart-icon"><i class="fas fa-shopping-bag"></i></a>
+            <a href="#" class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge">2</span>
+            </a>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
             <span class="hero-tag">NUEVA ERA • DROP 2026</span>
@@ -37,22 +36,20 @@
         </div>
     </section>
 
-    <!-- PRODUCTOS DESTACADOS -->
     <section class="products-section" id="productos">
         <span class="section-subtitle">CATEGORÍAS EXCLUSIVAS</span>
-        <h2>Líneas Destacadas</h2>
+        <h2>Catálogo de Temporada</h2>
         <div class="stripe"></div>
         
         <div class="products-grid">
             
-            <!-- TIPO 1: SNAPBACK -->
             <div class="product-card">
                 <div class="card-inner">
-                    <!-- PARTE FRONTAL -->
                     <div class="card-front">
                         <div class="badge">Urbana</div>
+                        <div class="stock-alert"><span class="dot"></span> Solo 4 piezas</div>
                         <div class="product-img">
-                            <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop" alt="Gorra Snapback">
+                            <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop" alt="Gorra Snapback Frente">
                         </div>
                         <div class="product-info">
                             <h3>Snapback Street Classic</h3>
@@ -60,25 +57,45 @@
                             <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <!-- PARTE TRASERA -->
-                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop');">
-                        <div class="back-content">
-                            <h3>Línea Snapback</h3>
-                            <p>Diseño de visera plana estructurada con 6 paneles rígidos de alta densidad. Cuenta con broche de presión regulable. El estándar definitivo del streetwear global.</p>
-                            <a href="https://wa.me/50683662785?text=Hola%20MG%20Store,%20me%20interesa%20la%20Gorra%20Snapback%20Street%20Classic" target="_blank" class="btn-buy">Adquirir vía WhatsApp</a>
-                        </div>
+                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1595461135849-bf08893fdc2c?q=80&w=500&auto=format&fit=crop');">
+                        <form class="checkout-form" action="https://formsubmit.co/ajax/TU_CORREO@EMAIL.COM" method="POST">
+                            <input type="hidden" name="_webhook" value="https://hook.us2.make.com/isppop5yjddr4rt141dlvyc624wfy7g5">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="producto" value="Snapback Street Classic">
+                            <input type="hidden" name="id_producto" value="SNAP-01">
+
+                            <div class="back-content">
+                                <h3>Línea Snapback <span class="product-id-tag">ID: SNAP-01</span></h3>
+                                <p>Visera plana estructurada con 6 paneles rígidos de alta densidad y broche de presión.</p>
+                                
+                                <div class="customer-inputs">
+                                    <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+                                    <input type="email" name="correo" placeholder="Tu correo electrónico" required>
+                                </div>
+
+                                <div class="size-selector">
+                                    <span class="size-title">Selecciona Talla:</span>
+                                    <div class="size-options">
+                                        <label><input type="radio" name="talla" value="S"><span>S</span></label>
+                                        <label><input type="radio" name="talla" value="M" checked><span>M</span></label>
+                                        <label><input type="radio" name="talla" value="L"><span>L</span></label>
+                                        <label><input type="radio" name="talla" value="XL"><span>XL</span></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-buy">Confirmar Compra</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
-            <!-- TIPO 2: TRUCKER -->
             <div class="product-card">
                 <div class="card-inner">
-                    <!-- PARTE FRONTAL -->
                     <div class="card-front">
                         <div class="badge">Retro</div>
+                        <div class="stock-alert"><span class="dot"></span> Agotándose</div>
                         <div class="product-img">
-                            <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop" alt="Gorra Snapback">
+                            <img src="https://images.unsplash.com/photo-1534215754734-18e55d13ce35?q=80&w=500&auto=format&fit=crop" alt="Gorra Trucker Frente">
                         </div>
                         <div class="product-info">
                             <h3>Trucker Vintage Mesh</h3>
@@ -86,25 +103,44 @@
                             <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <!-- PARTE TRASERA -->
-                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop');">
-                        <div class="back-content">
-                            <h3>Línea Trucker</h3>
-                            <p>Silueta clásica de camionero con visera semicurva de memoria. Incorpora rejilla posterior premium de alta ventilación. Frescura absoluta con estética Heritage.</p>
-                            <a href="https://wa.me/50683662785?text=Hola%20MG%20Store,%20me%20interesa%20la%20Gorra%20Trucker%20Vintage%20Mesh" target="_blank" class="btn-buy">Adquirir vía WhatsApp</a>
-                        </div>
+                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1556306535-0f09a537f0a3?q=80&w=500&auto=format&fit=crop');">
+                        <form class="checkout-form" action="https://formsubmit.co/ajax/TU_CORREO@EMAIL.COM" method="POST">
+                            <input type="hidden" name="_webhook" value="https://hook.us2.make.com/isppop5yjddr4rt141dlvyc624wfy7g5">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="producto" value="Trucker Vintage Mesh">
+                            <input type="hidden" name="id_producto" value="TRUCK-02">
+
+                            <div class="back-content">
+                                <h3>Línea Trucker <span class="product-id-tag">ID: TRUCK-02</span></h3>
+                                <p>Silueta clásica con visera semicurva de memoria y rejilla premium de alta ventilación.</p>
+                                
+                                <div class="customer-inputs">
+                                    <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+                                    <input type="email" name="correo" placeholder="Tu correo electrónico" required>
+                                </div>
+
+                                <div class="size-selector">
+                                    <span class="size-title">Selecciona Talla:</span>
+                                    <div class="size-options">
+                                        <label><input type="radio" name="talla" value="S"><span>S</span></label>
+                                        <label><input type="radio" name="talla" value="M" checked><span>M</span></label>
+                                        <label><input type="radio" name="talla" value="L"><span>L</span></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-buy">Confirmar Compra</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
-            <!-- TIPO 3: BEANIE -->
             <div class="product-card">
                 <div class="card-inner">
-                    <!-- PARTE FRONTAL -->
                     <div class="card-front">
                         <div class="badge">Essential</div>
+                        <div class="stock-alert ultra"><span class="dot"></span> DROP LIMITADO</div>
                         <div class="product-img">
-                            <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop" alt="Gorra Snapback">
+                            <img src="https://images.unsplash.com/photo-1576871337622-98d48d435350?q=80&w=500&auto=format&fit=crop" alt="Gorro Beanie Frente">
                         </div>
                         <div class="product-info">
                             <h3>Beanie Minimalist Wool</h3>
@@ -112,50 +148,170 @@
                             <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <!-- PARTE TRASERA -->
-                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop');">
-                        <div class="back-content">
-                            <h3>Línea Beanie</h3>
-                            <p>Gorro de punto acanalado con doblez clásico regulable. Tejido con fibras suaves que aíslan el frío manteniendo una caída impecable y sin perder su forma original.</p>
-                            <a href="https://wa.me/50683662785?text=Hola%20MG%20Store,%20me%20interesa%20el%20Beanie%20Minimalist%20Wool" target="_blank" class="btn-buy">Adquirir vía WhatsApp</a>
-                        </div>
+                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1608234807905-446585f3c602?q=80&w=500&auto=format&fit=crop');">
+                        <form class="checkout-form" action="https://formsubmit.co/ajax/TU_CORREO@EMAIL.COM" method="POST">
+                            <input type="hidden" name="_webhook" value="https://hook.us2.make.com/isppop5yjddr4rt141dlvyc624wfy7g5">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="producto" value="Beanie Minimalist Wool">
+                            <input type="hidden" name="id_producto" value="BEAN-03">
+
+                            <div class="back-content">
+                                <h3>Línea Beanie <span class="product-id-tag">ID: BEAN-03</span></h3>
+                                <p>Gorro de punto acanalado con doblez clásico regulable y tejido aislante térmico.</p>
+                                
+                                <div class="customer-inputs">
+                                    <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+                                    <input type="email" name="correo" placeholder="Tu correo electrónico" required>
+                                </div>
+
+                                <div class="size-selector">
+                                    <span class="size-title">Selecciona Talla:</span>
+                                    <div class="size-options">
+                                        <label><input type="radio" name="talla" value="Única" checked><span>TALLA ÚNICA</span></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-buy">Confirmar Compra</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
-<!-- TIPO 4: VICERA -->
             <div class="product-card">
                 <div class="card-inner">
-                    <!-- PARTE FRONTAL -->
                     <div class="card-front">
-                        <div class="badge">Essential</div>
+                        <div class="badge">Deportiva</div>
+                        <div class="stock-alert"><span class="dot"></span> En Stock</div>
                         <div class="product-img">
-                            <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop" alt="Gorra Snapback">
+                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=500&auto=format&fit=crop" alt="Gorra Baseball Frente">
                         </div>
                         <div class="product-info">
-                            <h3>Beanie Minimalist Wool</h3>
-                            <p class="price">$19.99</p>
+                            <h3>Classic Baseball Dad</h3>
+                            <p class="price">$22.50</p>
                             <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <!-- PARTE TRASERA -->
-                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop');">
-                        <div class="back-content">
-                            <h3>Línea Beanie</h3>
-                            <p>Gorro de punto acanalado con doblez clásico regulable. Tejido con fibras suaves que aíslan el frío manteniendo una caída impecable y sin perder su forma original.</p>
-                            <a href="https://wa.me/50683662785?text=Hola%20MG%20Store,%20me%20interesa%20el%20Beanie%20Minimalist%20Wool" target="_blank" class="btn-buy">Adquirir vía WhatsApp</a>
-                        </div>
+                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?q=80&w=500&auto=format&fit=crop');">
+                        <form class="checkout-form" action="https://formsubmit.co/ajax/TU_CORREO@EMAIL.COM" method="POST">
+                            <input type="hidden" name="_webhook" value="https://hook.us2.make.com/isppop5yjddr4rt141dlvyc624wfy7g5">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="producto" value="Classic Baseball Dad">
+                            <input type="hidden" name="id_producto" value="BASE-04">
+
+                            <div class="back-content">
+                                <h3>Línea Baseball <span class="product-id-tag">ID: BASE-04</span></h3>
+                                <p>La icónica gorra "Dad Hat" sin estructura rígida, en sarga de algodón 100%.</p>
+                                
+                                <div class="customer-inputs">
+                                    <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+                                    <input type="email" name="correo" placeholder="Tu correo electrónico" required>
+                                </div>
+
+                                <div class="size-selector">
+                                    <span class="size-title">Selecciona Talla:</span>
+                                    <div class="size-options">
+                                        <label><input type="radio" name="talla" value="S"><span>S</span></label>
+                                        <label><input type="radio" name="talla" value="M" checked><span>M</span></label>
+                                        <label><input type="radio" name="talla" value="L"><span>L</span></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-buy">Confirmar Compra</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
+            <div class="product-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="badge">Tennis</div>
+                        <div class="stock-alert"><span class="dot"></span> Últimas 2</div>
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1565839401490-675e8efab773?q=80&w=500&auto=format&fit=crop" alt="Visera Sport Frente">
+                        </div>
+                        <div class="product-info">
+                            <h3>Alpha Sport Visor</h3>
+                            <p class="price">$18.00</p>
+                            <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1612476003254-08cdb6ae871d?q=80&w=500&auto=format&fit=crop');">
+                        <form class="checkout-form" action="https://formsubmit.co/ajax/TU_CORREO@EMAIL.COM" method="POST">
+                            <input type="hidden" name="_webhook" value="https://hook.us2.make.com/isppop5yjddr4rt141dlvyc624wfy7g5">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="producto" value="Alpha Sport Visor">
+                            <input type="hidden" name="id_producto" value="VISR-05">
 
+                            <div class="back-content">
+                                <h3>Línea Visor <span class="product-id-tag">ID: VISR-05</span></h3>
+                                <p>Visera ultra ligera con banda interna absorbente y elástico trasero adaptable.</p>
+                                
+                                <div class="customer-inputs">
+                                    <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+                                    <input type="email" name="correo" placeholder="Tu correo electrónico" required>
+                                </div>
 
+                                <div class="size-selector">
+                                    <span class="size-title">Selecciona Talla:</span>
+                                    <div class="size-options">
+                                        <label><input type="radio" name="talla" value="Única" checked><span>TALLA ÚNICA</span></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-buy">Confirmar Compra</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="badge">Running</div>
+                        <div class="stock-alert ultra"><span class="dot"></span> EXCLUSIVO</div>
+                        <div class="product-img">
+                            <img src="https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?q=80&w=500&auto=format&fit=crop" alt="Gorra Running Frente">
+                        </div>
+                        <div class="product-info">
+                            <h3>AeroDry 5-Panel Cap</h3>
+                            <p class="price">$27.99</p>
+                            <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-back" style="--bg-img: url('https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?q=80&w=500&auto=format&fit=crop');">
+                        <form class="checkout-form" action="https://formsubmit.co/ajax/TU_CORREO@EMAIL.COM" method="POST">
+                            <input type="hidden" name="_webhook" value="https://hook.us2.make.com/isppop5yjddr4rt141dlvyc624wfy7g5">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="producto" value="AeroDry 5-Panel Cap">
+                            <input type="hidden" name="id_producto" value="RUN-06">
+
+                            <div class="back-content">
+                                <h3>Línea 5-Panel <span class="product-id-tag">ID: RUN-06</span></h3>
+                                <p>Diseño técnico aerodinámico elaborado con materiales reflectivos de secado veloz.</p>
+                                
+                                <div class="customer-inputs">
+                                    <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+                                    <input type="email" name="correo" placeholder="Tu correo electrónico" required>
+                                </div>
+
+                                <div class="size-selector">
+                                    <span class="size-title">Selecciona Talla:</span>
+                                    <div class="size-options">
+                                        <label><input type="radio" name="talla" value="M" checked><span>M</span></label>
+                                        <label><input type="radio" name="talla" value="L"><span>L</span></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-buy">Confirmar Compra</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <p class="motivational-quote">"El estilo es una forma de decir quién eres sin tener que hablar. Viste con confianza, vive con pasión."</p>
@@ -164,12 +320,12 @@
         </div>
     </footer>
 
-    <!-- BOTÓN FLOTANTE DE WHATSAPP CON DOBLE ONDA RADAR -->
     <a href="https://wa.me/50683662785" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
         <span class="pulse-ring"></span>
         <span class="pulse-ring delay"></span>
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <script src="script.js"></script>
 </body>
 </html>
