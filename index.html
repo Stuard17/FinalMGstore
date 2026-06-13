@@ -4,16 +4,934 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MG Store | Premium Headwear Elite</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES DE MARCA Y PALETA --- */
+        :root {
+            --black: #0A0A0A;
+            --black-2: #111111;
+            --black-3: #161616;
+            --black-4: #1E1E1E;
+            --white: #F5F3EE;
+            --white-dim: rgba(245, 243, 238, 0.6);
+            --accent: #1A3DC8;
+            --accent-light: #3358E8;
+            --accent-glow: rgba(26, 61, 200, 0.3);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* --- RESET & ESTILOS BASE --- */
+        *, *::before, *::after { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--black);
+            color: var(--white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        body {
+            padding-top: 100px;
+            overflow-x: hidden;
+        }
+
+        /* Ocultar cursor nativo en desktop para usar el personalizado */
+        @media (min-width: 1024px) {
+            body, a, button, input, label, select, video {
+                cursor: none !important;
+            }
+        }
+
+        /* --- CURSOR PERSONALIZADO --- */
+        .custom-cursor {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-light);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.2s, height 0.2s, background 0.2s;
+        }
+
+        .custom-cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(245, 243, 238, 0.2);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, width 0.3s, height 0.3s;
+        }
+
+        /* --- NAV NAVEGACIÓN PREMIUM --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.75);
+            border-bottom: 1px solid rgba(245, 243, 238, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: background-color 0.4s, border-color 0.4s;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .logo img {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 6px;
+            border: 1px solid rgba(245, 243, 238, 0.1);
+        }
+
+        .logo span {
+            color: var(--accent-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--white-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--white);
+        }
+
+        .nav-icons .cart-icon {
+            color: var(--white);
+            font-size: 1.15rem;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -7px;
+            right: -10px;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 0.65rem;
+            font-weight: 700;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+        }
+
+        /* --- SECCIÓN LABELS (FIRMA) --- */
+        .section-subtitle {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .stripe, .stripe-left {
+            width: 60px;
+            height: 2px;
+            background: var(--accent) !important;
+            margin: 16px auto 32px auto;
+        }
+
+        .stripe-left {
+            margin: 16px 0 32px 0;
+        }
+
+        /* --- HERO IMPACTO FULL-VIEWPORT --- */
+        .hero {
+            min-height: calc(85vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            position: relative;
+            /* Líneas de fondo estilo industrial */
+            background-image: linear-gradient(rgba(245,243,238,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(245,243,238,0.02) 1px, transparent 1px);
+            background-size: 100px 100px;
+            background-position: center top;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            font-family: var(--font-display);
+            padding: 6px 14px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 10vw, 120px);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .text-stroke {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--white);
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--white-dim);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary {
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding: 16px 36px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--accent-glow);
+        }
+
+        .btn-secondary-hero {
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            padding: 16px 36px;
+            text-decoration: none;
+            color: var(--white);
+            border: 1px solid rgba(245, 243, 238, 0.15);
+            border-radius: 4px;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .btn-secondary-hero:hover {
+            background: rgba(245, 243, 238, 0.05);
+            border-color: var(--white);
+        }
+
+        /* --- VIDEO SECCIÓN --- */
+        .video-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0;
+            background: #000000;
+            border: 1px solid rgba(245, 243, 238, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        /* --- BRAND MANIFIESTO --- */
+        .brand-manifesto {
+            background-color: var(--black-2);
+            padding: 100px 24px;
+        }
+
+        .manifesto-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .manifesto-text h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .manifesto-text p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--white-dim);
+        }
+
+        .manifesto-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .stat-box {
+            background: var(--black-3);
+            padding: 32px;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .stat-box h3 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--white);
+        }
+
+        .stat-box p {
+            font-size: 0.9rem;
+            color: var(--white-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- ANATOMÍA ESTILO BLUEPRINT TÉCNICO --- */
+        .cap-anatomy {
+            padding: 100px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cap-anatomy h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 800;
+        }
+
+        .section-desc {
+            max-width: 600px;
+            margin: 0 auto 60px auto;
+            color: var(--white-dim);
+            line-height: 1.6;
+        }
+
+        .anatomy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            text-align: left;
+        }
+
+        .anatomy-card {
+            background: var(--black-2);
+            padding: 40px 32px;
+            border: 1px solid rgba(245, 243, 238, 0.03);
+            border-radius: 6px;
+            position: relative;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .anatomy-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 6px;
+            background-image: radial-gradient(circle at 10px 10px, rgba(26, 61, 200, 0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .anatomy-card:hover {
+            border-color: var(--accent);
+            box-shadow: inset 0 0 20px rgba(26, 61, 200, 0.1);
+        }
+
+        .anatomy-icon {
+            font-size: 1.5rem;
+            color: var(--accent-light);
+            margin-bottom: 24px;
+            width: 50px;
+            height: 50px;
+            background: rgba(26, 61, 200, 0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .anatomy-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .anatomy-card p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--white-dim);
+        }
+
+        /* --- PRODUCTOS GRID ASIMÉTRICO Y REAL 3D FLIP --- */
+        .products-section {
+            background-color: var(--black-3);
+            padding: 100px 24px;
+            text-align: center;
+        }
+
+        .products-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 800;
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        /* Mecánica de Flip 3D Estricto */
+        .product-card {
+            background: transparent;
+            height: 480px;
+            perspective: 1500px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 0.8s cubic-bezier(0.2, 0.85, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+
+        .product-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(245, 243, 238, 0.05);
+        }
+
+        .card-front {
+            background-color: var(--black-4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 3px;
+            z-index: 5;
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .stock-alert {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--white-dim);
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(4px);
+            padding: 6px 12px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 5;
+        }
+
+        .stock-alert .dot {
+            width: 6px;
+            height: 6px;
+            background: #e23e3e;
+            border-radius: 50%;
+        }
+
+        .stock-alert.ultra .dot {
+            background: var(--accent-light);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 350px;
+            background: #0d0d0d;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 24px;
+            background: var(--black-4);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .product-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .price {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--white-dim);
+            font-weight: 500;
+        }
+
+        .btn-details {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-light);
+            font-weight: 600;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Reverso de la tarjeta */
+        .card-back {
+            transform: rotateY(180deg);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-back::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.7), var(--black) 90%);
+            z-index: 1;
+        }
+
+        .back-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 32px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .product-id-tag {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            color: var(--accent-light);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card-back h3 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .card-back p {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--white-dim);
+            margin-bottom: 24px;
+        }
+
+        .specs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .specs-list span {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+        }
+
+        .specs-list i {
+            color: var(--accent-light);
+            font-size: 0.9rem;
+        }
+
+        .btn-buy {
+            background: var(--white);
+            color: var(--black);
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            padding: 14px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: var(--accent-light);
+            color: var(--white);
+        }
+
+        /* --- TRUST BANNERS --- */
+        .trust-banners {
+            padding: 60px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .banner-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .banner-item i {
+            font-size: 1.5rem;
+            margin-top: 3px;
+        }
+
+        .banner-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .banner-item p {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--white-dim);
+        }
+
+        /* --- FAQ CON ACCORDEON REAL JAVASCRIPT --- */
+        .faq-section {
+            background-color: var(--black-2);
+            padding: 100px 24px;
+            text-align: center;
+        }
+
+        .faq-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 800;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            text-align: left;
+        }
+
+        .faq-item {
+            background: var(--black-3);
+            border-radius: 6px;
+            border: 1px solid rgba(245, 243, 238, 0.02);
+            overflow: hidden;
+        }
+
+        .faq-toggle {
+            display: none; /* Se mantiene estructurado pero la lógica pasa a JS dinámico */
+        }
+
+        .faq-question {
+            padding: 24px 32px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s;
+        }
+
+        .faq-question i {
+            font-size: 0.9rem;
+            color: var(--accent-light);
+            transition: transform 0.4s cubic-bezier(0.2, 0.85, 0.32, 1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.2, 0.85, 0.32, 1);
+            background: rgba(10, 10, 10, 0.2);
+        }
+
+        .faq-answer p {
+            padding: 0 32px 24px 32px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--white-dim);
+        }
+
+        /* Clases dinámicas manejadas por JS */
+        .faq-item.open .faq-question {
+            color: var(--accent-light);
+        }
+
+        .faq-item.open .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* --- FOOTER ESPACIADO --- */
+        footer {
+            background: var(--black);
+            padding: 80px 24px 140px 24px; /* Margen extra para que el carrusel fijo no obstruya el contenido */
+            text-align: center;
+            border-top: 1px solid rgba(245, 243, 238, 0.02);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .motivational-quote {
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--white-dim);
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .footer-divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(245, 243, 238, 0.1);
+            margin: 0 auto 24px auto;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: rgba(245, 243, 238, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        /* --- BOTÓN FLOTANTE WHATSAPP RE-POSICIONADO --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 110px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background-color: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+            z-index: 1001;
+            text-decoration: none;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #25D366;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .pulse-ring.delay {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        /* --- 3. BARRA INFERIOR FIJA TIPO CARRUSEL AZUL ELÉCTRICO PREMIUM --- */
+        .logo-ticker-container-bottom {
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 9999; 
+            background-color: #ffffff; 
+            overflow: hidden; 
+            border-top: 1px solid var(--accent); 
+            padding: 1px 0; 
+            display: flex; 
+            align-items: center; 
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .logo-track {
+            display: flex; 
+            align-items: center; 
+            gap: 120px; 
+            width: max-content; 
+            animation: scrollRightLinear 35s linear infinite; 
+            padding-left: 60px;
+        }
+
+        .logo-track img {
+            height: 70px; 
+            width: auto; 
+            object-fit: contain; 
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.6)) brightness(1.1);
+        }
+
+        @keyframes scrollRightLinear {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* --- SCROLL REVEAL SUAVE ANIMACIÓN --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.85, 0.32, 1), transform 0.8s cubic-bezier(0.2, 0.85, 0.32, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 991px) {
+            .nav-links { display: none; }
+            .manifesto-container { grid-template-columns: 1fr; gap: 40px; }
+            body { padding-top: 80px; }
+        }
+    </style>
 </head>
 <body>
 
-    <header class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: rgba(10, 10, 10, 0.95); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
-        <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;">
-            <div class="logo" style="display: flex; align-items: center; gap: 12px;">
-                <img src="logo.jpeg" alt="Logo MG" style="height: 42px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgba(0, 210, 255, 0.5)); border-radius: 4px;">
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor-ring" id="cursor-ring"></div>
+
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.jpeg" alt="Logo MG">
                 <div>M<span>ERCHG</span></div>
             </div>
             
@@ -25,7 +943,8 @@
                 <a href="#faq">Soporte</a>
             </nav>
             
-            <div class="nav-icons">
+           
+                
                 <a href="#" class="cart-icon">
                     <i class="fas fa-shopping-bag"></i>
                     <span class="cart-badge">0</span>
@@ -36,29 +955,29 @@
 
     <section class="hero">
         <div class="hero-content">
-            <span class="hero-tag" style="background: linear-gradient(90deg, #0000025b, oklab(89.872% -0.15847 -0.01207)); color: #01020f;">EDICIÓN EXCLUSIVA • DROP 2026</span>
+            <span class="hero-tag" style="background: var(--accent); color: var(--white);">EDICIÓN EXCLUSIVA • DROP 2026</span>
             <h1>MERCHG<br><span class="text-stroke">MADE IN TOWN.</span></h1>
             <p>Arquitectura textil diseñada para quienes no temen destacar. Descubre la calidad de una verdadera prenda élite fabricada con precisión milimétrica.</p>
             <div class="hero-actions">
-                <a href="#productos" class="btn-primary" style="background: #00d2ff; color: #000;">Ver Catálogo</a>
+                <a href="#productos" class="btn-primary" style="background: var(--white); color: var(--black);">Ver Catálogo</a>
                 <a href="#anatomia" class="btn-secondary-hero">Tecnología Sólida</a>
             </div>
         </div>
     </section>
 
-    <div class="video-container" style="max-width: 800px; margin: 40px auto; padding: 10px; background: #000000; border: 2px solid #00d2ff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15);">
-        <video controls playsinline style="width: 100%; height: auto; border-radius: 8px; display: block;">
+   <div class="video-container reveal">
+        <video controls playsinline>
             <source src="WhatsApp-Video-2026-06-06-at-7.20.23-PM.mp4" type="video/mp4">
             Tu navegador no soporta este video.
         </video>
     </div>
 
-    <section class="brand-manifesto" id="manifiesto">
+    <section class="brand-manifesto reveal" id="manifiesto">
         <div class="manifesto-container">
             <div class="manifesto-text">
-                <span class="section-subtitle" style="color: #00d2ff;">NUESTRO ADN</span>
+                <span class="section-subtitle" style="color: var(--accent-light);">NUESTRO ADN</span>
                 <h2>No hacemos gorras.<br>Construimos coronas modernas.</h2>
-                <div class="stripe-left" style="background: #00d2ff;"></div>
+                <div class="stripe-left"></div>
                 <p>En MERCHG creemos que una gorra no es un accesorio secundario; es la pieza central que unifica tu identidad visual. Diseñamos bajo estándares industriales exigentes, combinando la rebeldía del streetwear con la simetría perfecta de la alta sastrería.</p>
             </div>
             <div class="manifesto-stats">
@@ -78,10 +997,10 @@
         </div>
     </section>
 
-    <section class="cap-anatomy" id="anatomia">
-        <span class="section-subtitle" style="color: #00d2ff;">INGENIERÍA VISUAL</span>
+    <section class="cap-anatomy reveal" id="anatomia">
+        <span class="section-subtitle" style="color: var(--accent-light);">INGENIERÍA VISUAL</span>
         <h2>Detalles Técnicos Ajustables</h2>
-        <div class="stripe" style="background: #00d2ff;"></div>
+        <div class="stripe"></div>
         <p class="section-desc">Nuestras siluetas integran componentes mecánicos y materiales adaptables que garantizan una ergonomía inquebrantable.</p>
 
         <div class="anatomy-grid">
@@ -108,16 +1027,16 @@
         </div>
     </section>
 
-    <section class="products-section" id="productos">
-        <span class="section-subtitle" style="color: #00d2ff;">COLECCIONES EXCLUSIVAS</span>
+    <section class="products-section reveal" id="productos">
+        <span class="section-subtitle" style="color: var(--accent-light);">COLECCIONES EXCLUSIVAS</span>
         <h2>Catálogo de Temporada</h2>
-        <div class="stripe" style="background: #00d2ff;"></div>
+        <div class="stripe"></div>
         
         <div class="products-grid">
             <div class="product-card">
                 <div class="card-inner">
                     <div class="card-front">
-                        <div class="badge" style="background: #00d2ff; color: #000;"> CELESTE</div>
+                        <div class="badge">CELESTE</div>
                         <div class="stock-alert"><span class="dot"></span> Solo 4 piezas</div>
                         <div class="product-img">
                             <img src="gorraAzulPrincipal.jpeg" alt="Gorra Snapback Frente">
@@ -128,7 +1047,7 @@
                             <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <div class="card-back" style="--bg-img: url('gorraAzulFondo.jpeg');">
+                    <div class="card-back" style="--bg-img: url('gorraAzulFondo.jpeg'); background-image: url('gorraAzulFondo.jpeg');">
                         <div class="back-content">
                             <span class="product-id-tag">ID: SNAP-01</span>
                             <h3>Línea Snapback</h3>
@@ -138,7 +1057,7 @@
                                 <span><i class="fas fa-shield-alt"></i> Visera de Memoria Rígida</span>
                                 <span><i class="fas fa-wind"></i> Ojales Bordados</span>
                             </div>
-                            <a href="https://wa.me/50662644669?text=Hola%20MERCHG%20Store,%20me%20interesa%20la%20Gorra%20Snapback%20Street%20Classic%20(ID:%20SNAP-01)" target="_blank" class="btn-buy">
+                            <a href="https://wa.me/50662644669?text=Hola%20MERCHG%20Store,%20me%20interesa%20la%20Gorra%20Sky%20(ID:%20SNAP-01)" target="_blank" class="btn-buy">
                                 <i class="fab fa-whatsapp"></i> Ordenar vía WhatsApp
                             </a>
                         </div>
@@ -160,7 +1079,7 @@
                             <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <div class="card-back" style="--bg-img: url('gorraNegraFondo.jpeg');">
+                    <div class="card-back" style="--bg-img: url('gorraNegraFondo.jpeg'); background-image: url('gorraNegraFondo.jpeg');">
                         <div class="back-content">
                             <span class="product-id-tag">ID: TRUCK-02</span>
                             <h3>Línea Trucker</h3>
@@ -168,9 +1087,9 @@
                             <div class="specs-list">
                                 <span><i class="fas fa-wind"></i> Malla Antisudor Premium</span>
                                 <span><i class="fas fa-compress-alt"></i> Ajuste Ergonómico</span>
-                                <span><i class="fas fastar"></i> Logotipo en Relieve</span>
+                                <span><i class="fas fa-star"></i> Logotipo en Relieve</span>
                             </div>
-                            <a href="https://wa.me/50662644669?text=Hola%20MERCHG%20Store,%20me%20interesa%20la%20Gorra%20Trucker%20Vintage%20Mesh%20(ID:%20TRUCK-02)" target="_blank" class="btn-buy">
+                            <a href="https://wa.me/50662644669?text=Hola%20MERCHG%20Store,%20me%20interesa%20la%20Gorra%20All%20black%20(ID:%20TRUCK-02)" target="_blank" class="btn-buy">
                                 <i class="fab fa-whatsapp"></i> Ordenar vía WhatsApp
                             </a>
                         </div>
@@ -181,7 +1100,7 @@
             <div class="product-card">
                 <div class="card-inner">
                     <div class="card-front">
-                        <div class="badge">verde</div>
+                        <div class="badge">Verde</div>
                         <div class="stock-alert ultra"><span class="dot"></span> DROP LIMITADO</div>
                         <div class="product-img">
                             <img src="gorraVerdePrincipal.jpeg" alt="Gorra Beanie Frente">
@@ -192,7 +1111,7 @@
                             <span class="btn-details">Ver detalles <i class="fas fa-chevron-right"></i></span>
                         </div>
                     </div>
-                    <div class="card-back" style="--bg-img: url('gorraVerdeFondo.jpeg');">
+                    <div class="card-back" style="--bg-img: url('gorraVerdeFondo.jpeg'); background-image: url('gorraVerdeFondo.jpeg');">
                         <div class="back-content">
                             <span class="product-id-tag">ID: BEAN-03</span>
                             <h3>Línea Beanie</h3>
@@ -202,7 +1121,7 @@
                                 <span><i class="fas fa-expand"></i> Tejido Auto-Adaptable</span>
                                 <span><i class="fas fa-feather"></i> Ultra Confortable</span>
                             </div>
-                            <a href="https://wa.me/50662644669?text=Hola%20MERCHG%20Store,%20me%20interesa%20el%20Beanie%20Minimalist%20Wool%20(ID:%20BEAN-03)" target="_blank" class="btn-buy">
+                            <a href="https://wa.me/50662644669?text=Hola%20MERCHG%20Store,%20me%20interesa%20la%20Gorra%20Green%20(ID:%20BEAN-03)" target="_blank" class="btn-buy">
                                 <i class="fab fa-whatsapp"></i> Ordenar vía WhatsApp
                             </a>
                         </div>
@@ -212,23 +1131,23 @@
         </div>
     </section>
 
-    <section class="trust-banners">
+    <section class="trust-banners reveal">
         <div class="banner-item">
-            <i class="fas fa-truck-fast" style="color: #00d2ff;"></i>
+            <i class="fas fa-truck-fast" style="color: var(--accent-light);"></i>
             <div>
                 <h4>Envíos Seguros</h4>
                 <p>Despachos en 24/48 horas con número de rastreo.</p>
             </div>
         </div>
         <div class="banner-item">
-            <i class="fas fa-rotate" style="color: #00d2ff;"></i>
+            <i class="fas fa-rotate" style="color: var(--accent-light);"></i>
             <div>
                 <h4>Garantía de Calidad</h4>
                 <p>¿No te quedó perfecta? Tienes 7 días para cambios.</p>
             </div>
         </div>
         <div class="banner-item">
-            <i class="fas fa-user-shield" style="color: #00d2ff;"></i>
+            <i class="fas fa-user-shield" style="color: var(--accent-light);"></i>
             <div>
                 <h4>Atención Directa</h4>
                 <p>Soporte personalizado humano vía WhatsApp.</p>
@@ -236,31 +1155,28 @@
         </div>
     </section>
 
-    <section class="faq-section" id="faq">
-        <span class="section-subtitle" style="color: #00d2ff;">SOPORTE E INFORMACIÓN</span>
+    <section class="faq-section reveal" id="faq">
+        <span class="section-subtitle" style="color: var(--accent-light);">SOPORTE E INFORMACIÓN</span>
         <h2>Preguntas Frecuentes</h2>
-        <div class="stripe" style="background: #00d2ff;"></div>
+        <div class="stripe"></div>
 
         <div class="faq-container">
             <div class="faq-item">
-                <input type="checkbox" id="faq1" class="faq-toggle">
-                <label for="faq1" class="faq-question">¿Cómo sé cuál es mi talla ideal?<i class="fas fa-chevron-down"></i></label>
+                <div class="faq-question">¿Cómo sé cuál es mi talla ideal?<i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer">
                     <p>Nuestras gorras Snapback y Trucker son de diseño "One Size Fits Most" gracias a sus broches ajustables de alta precisión, adaptándose cómodamente a perímetros cefálicos de entre 54 cm y 61 cm.</p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <input type="checkbox" id="faq2" class="faq-toggle">
-                <label for="faq2" class="faq-question">¿Cuáles son los métodos de pago aceptados?<i class="fas fa-chevron-down"></i></label>
+                <div class="faq-question">¿Cuáles son los métodos de pago aceptados?<i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer">
                     <p>Al procesar tu pedido directamente por WhatsApp, aceptamos transferencias bancarias locales, SINPE Móvil y enlaces de pago seguros para tarjetas de débito o crédito.</p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <input type="checkbox" id="faq3" class="faq-toggle">
-                <label for="faq3" class="faq-question">¿Cómo se envían los productos para evitar daños?<i class="fas fa-chevron-down"></i></label>
+                <div class="faq-question">¿Cómo se envían los productos para evitar daños?<i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer">
                     <p>Cada una de nuestras gorras se empaca en cajas de cartón rígido corrugado reforzado con soportes internos de burbuja de aire para asegurar que la corona llegue impecable y perfectamente estructurada.</p>
                 </div>
@@ -268,58 +1184,203 @@
         </div>
     </section>
 
-    <footer style="padding-bottom: 110px;"> <div class="footer-content">
+    <footer>
+        <div class="footer-content">
             <p class="motivational-quote">"El estilo es una forma de decir quién eres sin tener que hablar. Viste con confianza, vive con pasión."</p>
             <div class="footer-divider"></div>
             <p class="copyright">&copy; 2026 MERCHG. Hecho para destacar.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/50662644669" class="whatsapp-float" target="_blank" rel="noopener noreferrer" style="bottom: 110px; z-index: 1001;">
+    <a href="https://instagram.com/TU_USUARIO" class="instagram-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="https://wa.me/50662644669" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
         <span class="pulse-ring"></span>
         <span class="pulse-ring delay"></span>
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <style>
+        /* Botón de Instagram */
+        .instagram-float {
+            position: fixed;
+            bottom: 180px; /* Posicionado arriba de WhatsApp */
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            /* Degradado oficial premium de Instagram */
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 8px 24px rgba(220, 39, 67, 0.25);
+            z-index: 1001;
+            text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.2, 0.85, 0.32, 1);
+        }
 
-    <div class="logo-ticker-container-bottom" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 9999; background-color: #ffffff; overflow: hidden; border-top: 1px solid #00000000; padding: 1px 0; display: flex; align-items: center; box-shadow: 0 -20px 30px rgba(0, 0, 0, 0.9);">
-        <div class="logo-track" style="display: flex; align-items: center; gap: 200px; width: max-content; animation: scrollRightLinear 30s linear infinite; padding-left: 60px;">
-            
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(252, 252, 252)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+        /* Botón de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 110px; /* Justo arriba del carrusel inferior */
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background-color: #25D366;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25);
+            z-index: 1001;
+            text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.2, 0.85, 0.32, 1);
+        }
 
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(252, 252, 252)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(253, 253, 253)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
-            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+        /* Animaciones y Hovers */
+        .instagram-float:hover, .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-3px);
+        }
+
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #25D366;
+            border-radius: 50%;
+            animation: pulse-animation 2s infinite;
+        }
+
+        .pulse-ring.delay {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        /* Integración con tu cursor personalizado (Solo computadoras) */
+        @media (min-width: 1024px) {
+            .instagram-float, .whatsapp-float {
+                cursor: none !important;
+            }
+        }
+    </style>
+
+    <div class="logo-ticker-container-bottom">
+        <div class="logo-track">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
+            <img src="logo.jpeg" alt="Logo Banner">
         </div>
     </div>
 
-    <style>
-        /* Animación fluida continua hacia la derecha */
-        @keyframes scrollRightLinear {
-            0% {
-                transform: translateX(-50%);
+    <script>
+        // 1. CONTROL DE LA NAVBAR AL HACER SCROLL
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-            100% {
-                transform: translateX(0);
-            }
+        });
+
+        // 2. CURSOR PERSONALIZADO (Lógica suave con detección móvil)
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursor-ring');
+        
+        if (window.innerWidth > 1024) {
+            window.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                // Efecto elástico para el anillo externo
+                ring.style.left = e.clientX + 'px';
+                ring.style.top = e.clientY + 'px';
+            });
+
+            // Reacción al hacer Hover en interactivos
+            document.querySelectorAll('a, button, .faq-question, .product-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.width = '14px';
+                    cursor.style.height = '14px';
+                    cursor.style.background = 'var(--white)';
+                    ring.style.width = '50px';
+                    ring.style.height = '50px';
+                    ring.style.borderColor = 'var(--accent-light)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.width = '8px';
+                    cursor.style.height = '8px';
+                    cursor.style.background = 'var(--accent-light)';
+                    ring.style.width = '36px';
+                    ring.style.height = '36px';
+                    ring.style.borderColor = 'rgba(245, 243, 238, 0.2)';
+                });
+            });
+        } else {
+            // Eliminar si es pantalla táctil
+            cursor.style.display = 'none';
+            ring.style.display = 'none';
         }
-        /* Margen superior estándar para la barra superior tradicional de un solo piso */
-        body {
-            padding-top: 85px !important;
-        }
-    </style>
+
+        // 3. ACORDEÓN DINÁMICO PARA LAS PREGUNTAS FRECUENTES (FAQ)
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const answer = button.nextElementSibling;
+                
+                if (item.classList.contains('open')) {
+                    answer.style.maxHeight = '0';
+                    item.classList.remove('open');
+                } else {
+                    // Cerrar otros acordeones abiertos opcionalmente
+                    document.querySelectorAll('.faq-item').forEach(i => {
+                        i.classList.remove('open');
+                        i.querySelector('.faq-answer').style.maxHeight = '0';
+                    });
+                    
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    item.classList.add('open');
+                }
+            });
+        });
+
+        // 4. ANIMACIÓN SCROLL REVEAL SUAVE (Intersection Observer)
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            revealObserver.observe(element);
+        });
+    </script>
 
 </body>
 </html>

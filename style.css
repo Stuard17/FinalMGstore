@@ -16,7 +16,7 @@ html {
 }
 
 :root {
-    --black:        #080808;
+    --black:        #000000;
     --black-2:      #0f0f0f;
     --black-3:      #151515;
     --black-4:      #1a1a1a;
@@ -89,21 +89,28 @@ body::before {
 /* ══════════════════════════════════════════════
    VIDEO CONTAINER
 ══════════════════════════════════════════════ */
-video-container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 5%;
-    position: relative;
-    z-index: 1;
-}
- 
-.video-container video {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: var(--radius-sm);
-    border: var(--border-medium);
-}
+        .video-container {
+            width: 92%;           /* En celulares deja un margen elegante a los lados */
+            max-width: 900px;     /* En PC limita el tamaño máximo para que se vea premium (puedes cambiar 900px por el tamaño que quieras) */
+            margin: 40px auto;    /* Centra el contenedor horizontalmente y le da espacio arriba y abajo */
+            border-radius: 16px;  /* Esquinas redondeadas modernas que combinan con tu web */
+            overflow: hidden;     /* Fuerza a que el video adopte las esquinas redondeadas del contenedor */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Sombra suave para darle profundidad */
+            background-color: var(--black-2); /* Fondo oscuro por si tarda en cargar */
+        }
+
+        .video-container video {
+            width: 100%;          /* Se adapta al 100% del contenedor */
+            height: auto;         /* Mantiene la proporción original sin deformar la imagen */
+            display: block;       /* Elimina espacios vacíos extraños debajo del video */
+        }
+
+/* Si usas el cursor personalizado en tu PC, esto hace que funcione correctamente al interactuar con el video */
+        @media (min-width: 1024px) {
+            .video-container video {
+                cursor: none !important;
+            }
+        }
 
 /* ══════════════════════════════════════════════
    NAVBAR
