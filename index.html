@@ -10,56 +10,55 @@
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo" style="display: flex; align-items: center; gap: 100px;">
-<img src="logo.jpeg"Logo MG" class="navbar-brand-img" style="height:20px; width: auto; filter: drop-shadow(0px 0px 8px #123dca); transition: transform 0.3s ease;">        
-<div>M<span>ERCHG</span></div>
-        
-        <nav class="nav-links">
-            <a href="#" class="active">Inicio</a>
-            <a href="#manifiesto">Marca</a>
-            <a href="#anatomia">Ingeniería</a>
-            <a href="#productos">Colecciones</a>
-            <a href="#faq">Soporte</a>
-        </nav>
-        <div class="nav-icons">
-            <a href="#" class="cart-icon">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="cart-badge">0</span>
-            </a>
+    <header class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: rgba(10, 10, 10, 0.95); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+        <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+                <img src="logo.jpeg" alt="Logo MG" style="height: 42px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgba(0, 210, 255, 0.5)); border-radius: 4px;">
+                <div>M<span>ERCHG</span></div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#" class="active">Inicio</a>
+                <a href="#manifiesto">Marca</a>
+                <a href="#anatomia">Ingeniería</a>
+                <a href="#productos">Colecciones</a>
+                <a href="#faq">Soporte</a>
+            </nav>
+            
+            <div class="nav-icons">
+                <a href="#" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge">0</span>
+                </a>
+            </div>
         </div>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <span class="hero-tag">EDICIÓN EXCLUSIVA • DROP 2026</span>
+            <span class="hero-tag" style="background: linear-gradient(90deg, #0000025b, oklab(89.872% -0.15847 -0.01207)); color: #01020f;">EDICIÓN EXCLUSIVA • DROP 2026</span>
             <h1>MERCHG<br><span class="text-stroke">MADE IN TOWN.</span></h1>
             <p>Arquitectura textil diseñada para quienes no temen destacar. Descubre la calidad de una verdadera prenda élite fabricada con precisión milimétrica.</p>
             <div class="hero-actions">
-                <a href="#productos" class="btn-primary">Ver Catálogo</a>
+                <a href="#productos" class="btn-primary" style="background: #00d2ff; color: #000;">Ver Catálogo</a>
                 <a href="#anatomia" class="btn-secondary-hero">Tecnología Sólida</a>
             </div>
         </div>
     </section>
 
-/*
-Titulo del video
-*/
-<div class="video-container">
-    <video controls playsinline style="width: 100%; max-width: 800px; display: block;">
-        <source src="WhatsApp-Video-2026-06-06-at-7.20.23-PM.mp4" type="video/mp4">
-        Tu navegador no soporta este video.
-    </video>
-</div>
-
-
+    <div class="video-container" style="max-width: 800px; margin: 40px auto; padding: 10px; background: #000000; border: 2px solid #00d2ff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15);">
+        <video controls playsinline style="width: 100%; height: auto; border-radius: 8px; display: block;">
+            <source src="WhatsApp-Video-2026-06-06-at-7.20.23-PM.mp4" type="video/mp4">
+            Tu navegador no soporta este video.
+        </video>
+    </div>
 
     <section class="brand-manifesto" id="manifiesto">
         <div class="manifesto-container">
             <div class="manifesto-text">
-                <span class="section-subtitle">NUESTRO ADN</span>
+                <span class="section-subtitle" style="color: #00d2ff;">NUESTRO ADN</span>
                 <h2>No hacemos gorras.<br>Construimos coronas modernas.</h2>
-                <div class="stripe-left"></div>
+                <div class="stripe-left" style="background: #00d2ff;"></div>
                 <p>En MERCHG creemos que una gorra no es un accesorio secundario; es la pieza central que unifica tu identidad visual. Diseñamos bajo estándares industriales exigentes, combinando la rebeldía del streetwear con la simetría perfecta de la alta sastrería.</p>
             </div>
             <div class="manifesto-stats">
@@ -80,9 +79,9 @@ Titulo del video
     </section>
 
     <section class="cap-anatomy" id="anatomia">
-        <span class="section-subtitle">INGENIERÍA VISUAL</span>
+        <span class="section-subtitle" style="color: #00d2ff;">INGENIERÍA VISUAL</span>
         <h2>Detalles Técnicos Ajustables</h2>
-        <div class="stripe"></div>
+        <div class="stripe" style="background: #00d2ff;"></div>
         <p class="section-desc">Nuestras siluetas integran componentes mecánicos y materiales adaptables que garantizan una ergonomía inquebrantable.</p>
 
         <div class="anatomy-grid">
@@ -110,15 +109,15 @@ Titulo del video
     </section>
 
     <section class="products-section" id="productos">
-        <span class="section-subtitle">COLECCIONES EXCLUSIVAS</span>
+        <span class="section-subtitle" style="color: #00d2ff;">COLECCIONES EXCLUSIVAS</span>
         <h2>Catálogo de Temporada</h2>
-        <div class="stripe"></div>
+        <div class="stripe" style="background: #00d2ff;"></div>
         
         <div class="products-grid">
             <div class="product-card">
                 <div class="card-inner">
                     <div class="card-front">
-                        <div class="badge"> CELESTE</div>
+                        <div class="badge" style="background: #00d2ff; color: #000;"> CELESTE</div>
                         <div class="stock-alert"><span class="dot"></span> Solo 4 piezas</div>
                         <div class="product-img">
                             <img src="gorraAzulPrincipal.jpeg" alt="Gorra Snapback Frente">
@@ -169,7 +168,7 @@ Titulo del video
                             <div class="specs-list">
                                 <span><i class="fas fa-wind"></i> Malla Antisudor Premium</span>
                                 <span><i class="fas fa-compress-alt"></i> Ajuste Ergonómico</span>
-                                <span><i class="fas fa-star"></i> Logotipo en Relieve</span>
+                                <span><i class="fas fastar"></i> Logotipo en Relieve</span>
                             </div>
                             <a href="https://wa.me/50662644669?text=Hola%20MERCHG%20Store,%20me%20interesa%20la%20Gorra%20Trucker%20Vintage%20Mesh%20(ID:%20TRUCK-02)" target="_blank" class="btn-buy">
                                 <i class="fab fa-whatsapp"></i> Ordenar vía WhatsApp
@@ -215,21 +214,21 @@ Titulo del video
 
     <section class="trust-banners">
         <div class="banner-item">
-            <i class="fas fa-truck-fast"></i>
+            <i class="fas fa-truck-fast" style="color: #00d2ff;"></i>
             <div>
                 <h4>Envíos Seguros</h4>
                 <p>Despachos en 24/48 horas con número de rastreo.</p>
             </div>
         </div>
         <div class="banner-item">
-            <i class="fas fa-rotate"></i>
+            <i class="fas fa-rotate" style="color: #00d2ff;"></i>
             <div>
                 <h4>Garantía de Calidad</h4>
                 <p>¿No te quedó perfecta? Tienes 7 días para cambios.</p>
             </div>
         </div>
         <div class="banner-item">
-            <i class="fas fa-user-shield"></i>
+            <i class="fas fa-user-shield" style="color: #00d2ff;"></i>
             <div>
                 <h4>Atención Directa</h4>
                 <p>Soporte personalizado humano vía WhatsApp.</p>
@@ -238,9 +237,9 @@ Titulo del video
     </section>
 
     <section class="faq-section" id="faq">
-        <span class="section-subtitle">SOPORTE E INFORMACIÓN</span>
+        <span class="section-subtitle" style="color: #00d2ff;">SOPORTE E INFORMACIÓN</span>
         <h2>Preguntas Frecuentes</h2>
-        <div class="stripe"></div>
+        <div class="stripe" style="background: #00d2ff;"></div>
 
         <div class="faq-container">
             <div class="faq-item">
@@ -269,19 +268,58 @@ Titulo del video
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
+    <footer style="padding-bottom: 110px;"> <div class="footer-content">
             <p class="motivational-quote">"El estilo es una forma de decir quién eres sin tener que hablar. Viste con confianza, vive con pasión."</p>
             <div class="footer-divider"></div>
             <p class="copyright">&copy; 2026 MERCHG. Hecho para destacar.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/50662644669" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <a href="https://wa.me/50662644669" class="whatsapp-float" target="_blank" rel="noopener noreferrer" style="bottom: 110px; z-index: 1001;">
         <span class="pulse-ring"></span>
         <span class="pulse-ring delay"></span>
         <i class="fab fa-whatsapp"></i>
     </a>
+
+
+    <div class="logo-ticker-container-bottom" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 9999; background-color: #ffffff; overflow: hidden; border-top: 1px solid #00000000; padding: 1px 0; display: flex; align-items: center; box-shadow: 0 -20px 30px rgba(0, 0, 0, 0.9);">
+        <div class="logo-track" style="display: flex; align-items: center; gap: 200px; width: max-content; animation: scrollRightLinear 30s linear infinite; padding-left: 60px;">
+            
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(252, 252, 252)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(252, 252, 252)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(253, 253, 253)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+            <img src="logo.jpeg" alt="Logo Banner" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0px 0px 8px rgb(255, 255, 255)) brightness(1.15);">
+        </div>
+    </div>
+
+    <style>
+        /* Animación fluida continua hacia la derecha */
+        @keyframes scrollRightLinear {
+            0% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        /* Margen superior estándar para la barra superior tradicional de un solo piso */
+        body {
+            padding-top: 85px !important;
+        }
+    </style>
 
 </body>
 </html>
