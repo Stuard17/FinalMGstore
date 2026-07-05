@@ -1,0 +1,1156 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO & CONFIGURACIÓN BASE
+   ========================================================================== */
+:root {
+    --bg-dark: #0a0a0c;
+    --bg-card: #131316;
+    --accent: #ffffff;
+    --accent-glow: #00d2ff; /* Neón sutil para el cursor y elementos clave */
+    --text-main: #f5f3ee;
+    --text-muted: #8a8a93;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+:root {
+    /* ... tus otras variables ... */
+
+    /* ======= CONTROL DE TAMAÑO DE LOGOS ======= */
+    --tamano-logo-superior: 60px;  /* Ajusta el logo de arriba (ej: 35px, 45px, 50px) */
+    --altura-logos-carrusel: 50px; /* Ajusta los logos del carrusel (ej: 30px, 40px, 50px) */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Selección de Texto llamativa */
+::selection {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+}
+
+/* Ocultar barra de scroll predeterminada (Opcional, pero se ve más Pro) */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* ==========================================================================
+   2. CURSOR PERSONALIZADO ULTRA-FLUIDO (Solo PCs)
+   ========================================================================== */
+.custom-cursor {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.custom-cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(245, 243, 238, 0.2);
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+/* ==========================================================================
+   3. NAVBAR NAVEGACIÓN INTELIGENTE
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 25px 0;
+    transition: var(--transition-smooth);
+}
+
+/* Cuando se hace scroll hacia abajo */
+.navbar.scrolled {
+    padding: 15px 0;
+    background: rgba(10, 10, 12, 0.85);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+}
+
+.logo-img {
+    width: var(--tamano-logo-superior);   /* Usa la variable de arriba */
+    height: var(--tamano-logo-superior);  /* Mantiene el logo perfectamente redondo */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.logo span {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--text-main);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: var(--transition-smooth);
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-icons a {
+    color: var(--text-main);
+    font-size: 1.2rem;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.nav-icons a:hover {
+    transform: translateY(-2px);
+    color: var(--accent-glow);
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: var(--text-main);
+    color: var(--bg-dark);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   4. HERO BRUTALISTA CON LÍNEAS DE REJILLA
+   ========================================================================== */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 10%;
+    overflow: hidden;
+}
+
+/* Imagen de fondo sutil pero inmersiva */
+.hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('portadaMG.jpeg') center/cover no-repeat;
+    opacity: 0.15;
+    filter: grayscale(100%);
+    z-index: 1;
+}
+
+.hero-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 40%, var(--bg-dark));
+    z-index: 2;
+}
+
+/* Líneas de cuadrícula industriales */
+.hero-grid-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.01) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255,255,255,0.01) 1px, transparent 1px);
+    z-index: 3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+}
+
+.hero-tag {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.9;
+    font-weight: 800;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.accent-letter {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text-main);
+    animation: pulseGlow 3s infinite alternate;
+}
+
+.text-stroke {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin-bottom: 40px;
+}
+
+/* Botones interactivos */
+.hero-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 16px 35px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    border: 1px solid var(--accent);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--text-main);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary-hero {
+    background: transparent;
+    color: var(--text-main);
+    padding: 16px 35px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.btn-secondary-hero:hover {
+    border-color: var(--text-main);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.hero-scroll-cue {
+    position: absolute;
+    bottom: 40px;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transform: rotate(90deg);
+    transform-origin: bottom right;
+    z-index: 10;
+}
+
+.scroll-line {
+    width: 50px;
+    height: 1px;
+    background: var(--text-muted);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--text-main);
+    animation: scrollAnim 2s infinite linear;
+}
+
+.hero-scroll-cue span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   5. SECCIÓN DE VIDEO EMBAJADOR
+   ========================================================================== */
+.video-section {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.video-eyebrow {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    filter: brightness(0.9);
+    transition: var(--transition-smooth);
+}
+
+.video-container:hover video {
+    filter: brightness(1);
+}
+
+/* ==========================================================================
+   6. MANIFIESTO DE MARCA Y SECCIONES GLOBALES
+   ========================================================================== */
+.section-subtitle {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.section-subtitle.centered {
+    text-align: center;
+}
+
+.stripe, .stripe-left {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin: 20px 0;
+}
+.stripe { margin: 20px auto; }
+
+.brand-manifesto {
+    padding: 140px 40px;
+    background: linear-gradient(to bottom, var(--bg-dark), #0e0e11);
+}
+
+.manifesto-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.manifesto-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.manifesto-text em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text-main);
+}
+
+.manifesto-text p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 550px;
+    margin-top: 20px;
+}
+
+.manifesto-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.stat-box {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.stat-box h3 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.stat-box span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   7. INGENIERÍA VISUAL (ANATOMÍA DE GORRA)
+   ========================================================================== */
+.cap-anatomy {
+    padding: 120px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.anatomy-header {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.anatomy-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+
+.section-desc {
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.anatomy-card {
+    background: var(--bg-card);
+    padding: 40px 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.anatomy-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.03);
+    transition: var(--transition-smooth);
+}
+
+.anatomy-icon {
+    font-size: 1.8rem;
+    color: var(--text-main);
+    margin-bottom: 25px;
+}
+
+.anatomy-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.anatomy-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Hover técnico de cartas */
+.anatomy-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+.anatomy-card:hover::before {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   8. CATÁLOGO - EFECTO CARDS 3D FLIP (INCREÍBLE DE VER)
+   ========================================================================== */
+.products-section {
+    padding: 120px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.products-header h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.products-hint {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+/* Configuración del Espejo 3D */
+.product-card {
+    background-color: transparent;
+    height: 520px;
+    perspective: 1500px; /* Intensidad del efecto 3D */
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Al pasar el ratón, la carta gira elegantemente */
+.product-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- CARA FRONTAL --- */
+.card-front {
+    background-color: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.badge {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 14px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+}
+
+.stock-alert {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 0.75rem;
+    color: #ff3b30;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.stock-alert .dot {
+    width: 6px;
+    height: 6px;
+    background: #ff3b30;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulseGlow 1.5s infinite alternate;
+}
+
+.stock-alert.ultra {
+    color: #ffcc00;
+}
+.stock-alert.ultra .dot {
+    background: #ffcc00;
+}
+
+.product-img {
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.product-img img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: var(--transition-smooth);
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: left;
+    border-top: 1px solid rgba(255,255,255,0.03);
+    padding-top: 20px;
+}
+
+.product-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    text-transform: uppercase;
+}
+
+.card-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.price {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* --- CARA TRASERA --- */
+.card-back {
+    background-size: cover;
+    background-position: center;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+}
+
+.card-back-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(10,10,12,0.4) 0%, rgba(10,10,12,0.95) 75%);
+    z-index: 1;
+}
+
+.back-content {
+    position: relative;
+    z-index: 2;
+    padding: 35px;
+}
+
+.product-id-tag {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.card-back h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.card-back p {
+    font-size: 0.9rem;
+    color: #d1d1d6;
+    margin-bottom: 25px;
+}
+
+.specs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.specs-list span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.specs-list i {
+    color: var(--text-main);
+    width: 16px;
+}
+
+.btn-buy {
+    width: 100%;
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 15px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: var(--transition-smooth);
+}
+
+.btn-buy:hover {
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+    transform: scale(1.02);
+}
+
+/* ==========================================================================
+   9. BANNERS DE CONFIANZA / VALORES
+   ========================================================================== */
+.trust-banners {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 60px 40px;
+    background: #0e0e11;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.02);
+}
+
+.banner-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.banner-icon {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    background: rgba(255,255,255,0.03);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.banner-item h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.banner-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   10. SOPORTE - PREGUNTAS FRECUENTES (FAQ ACORDEÓN)
+   ========================================================================== */
+.faq-section {
+    padding: 120px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-section h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.faq-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-item {
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.02);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.faq-question {
+    padding: 24px 30px;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.faq-question i {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255,255,255,0.01);
+}
+
+.faq-answer p {
+    padding: 0 30px 24px 30px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Estado abierto por JavaScript */
+.faq-item.open {
+    border-color: rgba(255,255,255,0.1);
+}
+.faq-item.open .faq-question i {
+    transform: rotate(180deg);
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+   11. FOOTER MINIMALISTA
+   ========================================================================== */
+.main-footer {
+    padding: 100px 40px 60px 40px;
+    border-top: 1px solid rgba(255,255,255,0.03);
+    text-align: center;
+}
+
+.footer-inner {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+.footer-logo span { color: var(--text-muted); font-weight: 400; }
+
+.motivational-quote {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.footer-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 40px auto;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   12. BOTONES FLOTANTES INTERACTIVOS (INSTAGRAM & WHATSAPP)
+   ========================================================================== */
+.instagram-float, .whatsapp-float {
+    position: fixed;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fbfbfb;
+    text-decoration: none;
+    z-index: 999;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: var(--transition-smooth);
+}
+
+/*
+aqui agregar boton de instagram si desea
+*/
+
+
+.whatsapp-float {
+    bottom: 95px !important;  /* Lo sube lo suficiente para librar la franja blanca */
+    right: 30px;
+    position: fixed;
+    z-index: 10001;           /* Asegura que quede por encima de absolutamente todo */
+}
+
+/* Efecto de pulso concéntrico para WhatsApp */
+.pulse-ring {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #25d366;
+    opacity: 0.4;
+    z-index: -1;
+    animation: pulseRing 2.5s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+.pulse-ring.delay {
+    animation-delay: 0.8s;
+}
+
+
+.instagram-float:hover, .whatsapp-float:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgb(227, 187, 187);
+}
+
+
+/* ==========================================================================
+   13. CARRUSEL DE LOGOS FIJO ABAJO (PREMIUM - BLANCO TOTAL)
+   ========================================================================== */
+.logo-ticker-bottom {
+    position: fixed;            /* Lo mantiene siempre visible en pantalla */
+    bottom: 0;                  /* Lo ancla exactamente abajo del todo */
+    left: 0;
+    width: 100%;
+    height: 70px;               /* Altura fija y elegante */
+    background-color: #fffffff0 !important; /* Blanco puro para máxima limpieza */
+    z-index: 9998;              /* Se mantiene sobre el contenido pero bajo el cursor */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 -10px 40px rgba(255, 255, 255, 0.195); /* Sombra suave para separarlo del contenido */
+    border: none;               /* Eliminamos cualquier borde o línea */
+}
+
+.ticker-track {
+    display: flex;
+    align-items: center;
+    gap: 80px;                  /* Espacio generoso entre logos */
+    width: max-content;
+    animation: infiniteScroll 20s linear infinite;
+    padding: 0;
+}
+
+/* Limpieza absoluta del logo dentro del carrusel */
+.ticker-track img {
+    height: var(--altura-logos-carrusel); /* Usa la variable de arriba */
+    width: auto;                          /* Evita que el logo se deforme o se estire */
+    object-fit: contain;
+    filter: none !important;
+}
+
+/* Eliminamos cualquier texto, guion, círculo o separador extra que pudiera haber en el HTML */
+.ticker-track span, 
+.ticker-track i, 
+.ticker-sep {
+    display: none !important;
+}
+
+/* Ajuste de seguridad para el footer: le da un espacio abajo para que el carrusel no lo tape al final */
+.main-footer {
+    padding-bottom: 130px !important;
+}
+
+/* ==========================================================================
+   14. ANIMACIONES (KEYFRAMES) & EFECTO REVEAL AL HACER SCROLL
+   ========================================================================== */
+@keyframes infiniteScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollAnim {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes pulseGlow {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+@keyframes pulseRing {
+    0% { transform: scale(0.95); opacity: 0.5; }
+    50% { opacity: 0.3; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Clases para el Scroll Reveal (Intersection Observer) */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   15. ADAPTABILIDAD TOTAL (RESPONSIVE)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .nav-links { display: none; } /* En móviles puedes armar un menú hamburguesa luego */
+    .manifesto-container { grid-template-columns: 1fr; gap: 40px; }
+    .hero { padding: 0 5%; text-align: center; justify-content: center; }
+    .hero-actions { justify-content: center; flex-direction: column; width: 100%; }
+    .hero-scroll-cue { display: none; }
+    .instagram-float { bottom: auto; top: 20px; right: 20px; width: 45px; height: 45px; font-size: 1.2rem; }
+    .whatsapp-float { bottom: 20px; right: 20px; }
+}
+
+@media (max-width: 480px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card { height: 480px; }
+    .trust-banners { padding: 40px 20px; }
+}
